@@ -7,23 +7,15 @@ import org.junit.Test;
 public class ShapesTest {
 
 	@Test
-	public void rectangleSetWidthMustOnlySetWidth() {
+	public void rectangleCopyWithMustOnlySetWidth() {
 		for (int i = 0; i < 100; i++) {
-			Rectangle r = arbitraryRectangle();
-			int heightBefore = r.getHeight();
-			r.setWidth(30);
-			int heightAfter = r.getHeight();
+			Rectangle
+				before = arbitraryRectangle(),
+				after = before.copyWithWidth(30);
 
-			assertEquals(30, r.getWidth());
-			assertEquals(heightBefore, heightAfter);
+			assertEquals(30, after.getWidth());
+			assertEquals(before.getHeight(), after.getHeight());
 		}
-	}
-
-	@Test
-	public void squareMustRemainSquare() {
-		Square s = new Square(10);
-		s.setWidth(20);
-		assertEquals(s.getWidth(), s.getHeight());
 	}
 
 	private static Rectangle arbitraryRectangle() {
