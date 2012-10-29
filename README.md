@@ -9,3 +9,13 @@ Liskov Substitutability Principle (LSP)
 
 Specification-based testing
   - establish invariants (contracts) and assert that those invariants hold for *all* possible arbitrary sample data
+
+
+Immutability
+------------
+
+Benefits
+  - Fewer tests
+  - Less code
+  - Correct code
+  - Safe inheritance (code reuse)
