@@ -1,16 +1,22 @@
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import java.util.Random;
 
+import org.junit.Test;
 
 public class ShapesTest {
 
 	@Test
 	public void rectangleSetWidthMustOnlySetWidth() {
-		Rectangle r = new Rectangle(10, 20);
-		r.setWidth(30);
-		assertEquals(30, r.getWidth());
-		assertEquals(20, r.getHeight());
+		for (int i = 0; i < 100; i++) {
+			Rectangle r = arbitraryRectangle();
+			int heightBefore = r.getHeight();
+			r.setWidth(30);
+			int heightAfter = r.getHeight();
+
+			assertEquals(30, r.getWidth());
+			assertEquals(heightBefore, heightAfter);
+		}
 	}
 
 	@Test
@@ -18,5 +24,14 @@ public class ShapesTest {
 		Square s = new Square(10);
 		s.setWidth(20);
 		assertEquals(s.getWidth(), s.getHeight());
+	}
+
+	private static Rectangle arbitraryRectangle() {
+		Random random = new Random();
+		if (random.nextBoolean()) {
+			return new Square(random.nextInt(50));
+		} else {
+			return new Rectangle(random.nextInt(50), random.nextInt(50));
+		}
 	}
 }
