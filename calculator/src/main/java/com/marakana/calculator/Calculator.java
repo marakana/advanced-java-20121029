@@ -1,8 +1,20 @@
 package com.marakana.calculator;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 public class Calculator {
+
+	private static Map<String, Operator> operators;
+
+	static {
+		operators = new HashMap<String, Operator>();
+		operators.put("+", Operator.ADD);
+		operators.put("-", Operator.SUBTRACT);
+		operators.put("*", Operator.MULTIPLY);
+		operators.put("/", Operator.DIVIDE);
+	}
 
 	public static boolean handleNumber(String token, Stack<Integer> stack) {
 		try {
@@ -14,34 +26,13 @@ public class Calculator {
 	}
 
 	public static boolean handleOperator(String token, Stack<Integer> stack) {
-		if (token.length() != 1)
+		Operator op = operators.get(token);
+		if (op == null)
 			return false;
-
-		int lhs, rhs;
-		switch (token.charAt(0)) {
-		case '+':
-			rhs = stack.pop();
-			lhs = stack.pop();
-			stack.push(lhs + rhs);
-			return true;
-		case '-':
-			rhs = stack.pop();
-			lhs = stack.pop();
-			stack.push(lhs - rhs);
-			return true;
-		case '*':
-			rhs = stack.pop();
-			lhs = stack.pop();
-			stack.push(lhs * rhs);
-			return true;
-		case '/':
-			rhs = stack.pop();
-			lhs = stack.pop();
-			stack.push(lhs / rhs);
-			return true;
-		default:
-			return false;
-		}
+		
+		int rhs = stack.pop(), lhs = stack.pop();
+		stack.push(op.operate(lhs, rhs));
+		return true;
 	}
 
 	public static void main(String[] args) {
