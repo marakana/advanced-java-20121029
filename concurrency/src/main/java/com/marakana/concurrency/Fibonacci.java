@@ -17,17 +17,24 @@ public class Fibonacci {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+		Thread[] threads = new Thread[10];
 		for (int i = 0; i < 10; i++) {
-			Thread t = new Thread() {
+			threads[i] = new Thread() {
 				public void run() {
 					int input = random.nextInt(40);
 					BigInteger output = fib(input);
 					System.out.format("fib(%d) = %s\n", input, output);
 				}
 			};
-			t.start();
+			threads[i].start();
 		}
+
+		for (int i = 0; i < 10; i++) {
+			threads[i].join();
+		}
+
+		System.out.println("done");
 	}
 
 }
