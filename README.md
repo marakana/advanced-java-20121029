@@ -40,3 +40,5 @@ Design Patterns
 ---------------
 
   - Composite: multiple implementations of a common interface, some of which may recursively contain instances of the interface. Example: expressions with sub-expressions in a parse tree.
+
+  - Visitor: avoid polluting a composite (above) data structure with orthogonal concerns. Define a "Visitor" interface with visit() methods for each composite implementation case, and define an accept() method in the composite interface which takes a visitor. Example: multiple serializers and evaluators for expressions.
