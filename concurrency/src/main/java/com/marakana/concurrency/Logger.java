@@ -8,18 +8,22 @@ public class Logger implements Runnable {
 	Queue<String> queue = new LinkedList<String>();
 
 	public void log(String message) {
-		synchronized (queue) {
+		synchronized (this) {
 			queue.add(message);
+			notify();
 		}
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			if (queue.isEmpty()) {
-				Thread.yield();
-			} else {
-				synchronized (queue) {
+			synchronized (this) {
+				if (queue.isEmpty()) {
+					try {
+						wait();
+					} catch (InterruptedException e) {
+					}
+				} else {
 					System.out.println(queue.remove());
 				}
 			}
