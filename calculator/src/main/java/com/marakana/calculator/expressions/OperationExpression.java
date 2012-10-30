@@ -1,6 +1,7 @@
 package com.marakana.calculator.expressions;
 
 import com.marakana.calculator.Operator;
+import com.marakana.calculator.expressions.visitors.ExpressionVisitor;
 
 public class OperationExpression implements Expression {
 
@@ -23,6 +24,11 @@ public class OperationExpression implements Expression {
 
 	public Expression getRhs() {
 		return rhs;
+	}
+
+	@Override
+	public <T> T accept(ExpressionVisitor<T> visitor) {
+		return visitor.visitOperationExpression(this);
 	}
 
 	@Override

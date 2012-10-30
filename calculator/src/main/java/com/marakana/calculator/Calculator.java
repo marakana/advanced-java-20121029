@@ -7,6 +7,8 @@ import java.util.Stack;
 import com.marakana.calculator.expressions.Expression;
 import com.marakana.calculator.expressions.NumberExpression;
 import com.marakana.calculator.expressions.OperationExpression;
+import com.marakana.calculator.expressions.visitors.ExpressionEvaluator;
+import com.marakana.calculator.expressions.visitors.ExpressionInfixSerializer;
 
 public class Calculator {
 
@@ -57,6 +59,6 @@ public class Calculator {
 		}
 
 		Expression expression = parse(args[0]);
-		System.out.println(expression.infix() + " = " + expression.evaluate());
+		System.out.println(expression.accept(new ExpressionInfixSerializer()) + " = " + expression.accept(new ExpressionEvaluator()));
 	}
 }

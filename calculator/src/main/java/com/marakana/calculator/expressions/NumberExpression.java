@@ -1,5 +1,7 @@
 package com.marakana.calculator.expressions;
 
+import com.marakana.calculator.expressions.visitors.ExpressionVisitor;
+
 public class NumberExpression implements Expression {
 
 	private final int number;
@@ -10,6 +12,11 @@ public class NumberExpression implements Expression {
 
 	public int getNumber() {
 		return number;
+	}
+
+	@Override
+	public <T> T accept(ExpressionVisitor<T> visitor) {
+		return visitor.visitNumberExpression(this);
 	}
 
 	@Override

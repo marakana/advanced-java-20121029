@@ -1,5 +1,7 @@
 package com.marakana.calculator.expressions;
 
-public interface Expression {
+import com.marakana.calculator.expressions.visitors.ExpressionVisitor;
 
+public interface Expression {
+	<T> T accept(ExpressionVisitor<T> visitor);
 }
