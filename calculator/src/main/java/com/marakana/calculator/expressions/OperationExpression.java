@@ -52,17 +52,5 @@ public class OperationExpression implements Expression {
 			return false;
 		return true;
 	}
-	
-	// TODO: move this stuff out
-
-	@Override
-	public int evaluate() {
-		return op.operate(lhs.evaluate(), rhs.evaluate());
-	}
-
-	@Override
-	public String infix() {
-		return String.format("(%s %s %s)", lhs.infix(), op, rhs.infix());
-	}
 
 }

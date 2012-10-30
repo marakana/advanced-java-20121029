@@ -34,16 +34,4 @@ public class NumberExpression implements Expression {
 		return true;
 	}
 
-	// TODO: move this stuff out
-
-	@Override
-	public int evaluate() {
-		return number;
-	}
-
-	@Override
-	public String infix() {
-		return Integer.toString(number);
-	}
-
 }

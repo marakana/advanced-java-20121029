@@ -12,6 +12,12 @@ Specification-based testing
 
   - establish invariants (contracts) and assert that those invariants hold for *all* possible arbitrary sample data
 
+Value Classes vs. Service Classes
+---------------------------------
+
+  - Value classes have structural identity, final fields, getters. They shouldn't have anything else (no other methods), otherwise you end up with unnecessary coupling in your architecture.
+  - Service classes usually only have reference identity, and mutable state.
+
 Object Identity
 ---------------
 
