@@ -2,6 +2,8 @@ package com.marakana.concurrency;
 
 import java.math.BigInteger;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Fibonacci {
 
@@ -18,23 +20,22 @@ public class Fibonacci {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		Thread[] threads = new Thread[10];
+		ExecutorService e = Executors.newFixedThreadPool(10);
+
 		for (int i = 0; i < 10; i++) {
-			threads[i] = new Thread() {
+			e.execute(new Runnable() {
 				public void run() {
-					int input = random.nextInt(40);
-					BigInteger output = fib(input);
-					System.out.format("fib(%d) = %s\n", input, output);
+					while (true) {
+						int input = random.nextInt(40);
+						BigInteger output = fib(input);
+						System.out.format("fib(%d) = %s\n", input, output);
+					}
 				}
-			};
-			threads[i].start();
+			});
 		}
 
-		for (int i = 0; i < 10; i++) {
-			threads[i].join();
-		}
+		e.shutdown();
 
-		System.out.println("done");
 	}
 
 }
