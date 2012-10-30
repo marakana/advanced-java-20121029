@@ -17,4 +17,9 @@ public class OperationExpression implements Expression {
 		return op.operate(lhs.evaluate(), rhs.evaluate());
 	}
 
+	@Override
+	public String infix() {
+		return String.format("(%s %s %s)", lhs.infix(), op, rhs.infix());
+	}
+
 }

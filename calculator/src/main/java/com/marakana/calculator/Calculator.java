@@ -39,27 +39,24 @@ public class Calculator {
 		return true;
 	}
 
+	public static Expression parse(String expression) {
+		Stack<Expression> stack = new Stack<Expression>();
+		for (String token : expression.split(" ")) {
+			if (!handleNumber(token, stack) && !handleOperator(token, stack)) {
+				throw new IllegalArgumentException("malformed expression");
+			}
+		}
+
+		return stack.pop();
+	}
+
 	public static void main(String[] args) {
 		if (args.length != 1) {
 			System.err.println("usage: Calculator <expression>");
 			return;
 		}
 
-		Stack<Expression> stack = new Stack<Expression>();
-		for (String token : args[0].split(" ")) {
-			if (!handleNumber(token, stack) && !handleOperator(token, stack)) {
-				System.err.println("invalid expression");
-				return;
-			}
-		}
-		System.out.println(stack.pop().evaluate());
-
-		/*
-		 * Create an empty stack of integers Tokenize the expression string
-		 * (split on whitespace) For each token: - if it's a number, push it -
-		 * if it's [ + - * / ], pop two operands, do the operation and push the
-		 * result - if it's garbage, print an error The result is the last thing
-		 * left on the stack
-		 */
+		Expression expression = parse(args[0]);
+		System.out.println(expression.infix() + " = " + expression.evaluate());
 	}
 }

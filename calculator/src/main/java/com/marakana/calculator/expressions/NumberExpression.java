@@ -12,4 +12,9 @@ public class NumberExpression implements Expression {
 		return number;
 	}
 
+	@Override
+	public String infix() {
+		return Integer.toString(number);
+	}
+
 }
