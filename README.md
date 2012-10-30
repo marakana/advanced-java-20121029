@@ -35,6 +35,7 @@ Benefits
   - Correct code
   - Safe inheritance (code reuse)
   - Stable object identity
+  - Obviates need for synchronization, resulting in correct, high performance concurrent code
 
 Design Patterns
 ---------------
