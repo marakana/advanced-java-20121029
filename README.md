@@ -28,4 +28,9 @@ Benefits
   - Less code
   - Correct code
   - Safe inheritance (code reuse)
-  - Stable object identtiy
+  - Stable object identity
+
+Design Patterns
+---------------
+
+  - Composite: multiple implementations of a common interface, some of which may recursively contain instances of the interface. Example: expressions with sub-expressions in a parse tree.
