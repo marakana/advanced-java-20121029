@@ -22,18 +22,21 @@ public class Fibonacci {
 	public static void main(String[] args) throws InterruptedException {
 		ExecutorService e = Executors.newFixedThreadPool(10);
 
+		final Logger l = new Logger();
+		
 		for (int i = 0; i < 10; i++) {
 			e.execute(new Runnable() {
 				public void run() {
 					while (true) {
 						int input = random.nextInt(40);
 						BigInteger output = fib(input);
-						System.out.format("fib(%d) = %s\n", input, output);
+						l.log(String.format("fib(%d) = %s", input, output));
 					}
 				}
 			});
 		}
-
+		
+		l.run();
 		e.shutdown();
 
 	}
