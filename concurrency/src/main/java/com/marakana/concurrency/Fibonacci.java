@@ -19,7 +19,7 @@ public class Fibonacci {
 		}
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 		ExecutorService e = Executors.newFixedThreadPool(10);
 
 		final Logger l = new Logger();
@@ -28,7 +28,7 @@ public class Fibonacci {
 			e.execute(new Runnable() {
 				public void run() {
 					while (true) {
-						int input = random.nextInt(40);
+						int input = random.nextInt(30);
 						BigInteger output = fib(input);
 						l.log(String.format("fib(%d) = %s", input, output));
 					}
