@@ -6,10 +6,7 @@ public abstract class ImmutableList<E> {
 
 	public abstract E head();
 	public abstract ImmutableList<E> tail();
-
-	public <F> ImmutableList<F> map(Function<E, F> fn) {
-		return null; // TODO
-	}
+	public abstract <F> ImmutableList<F> map(Function<E, F> fn);
 
 	public ImmutableList<E> cons(final E head) {
 		return new Cons<E>(head, this);
@@ -36,6 +33,11 @@ public abstract class ImmutableList<E> {
 		@Override
 		public ImmutableList<E> tail() {
 			return tail;
+		}
+
+		@Override
+		public <F> ImmutableList<F> map(Function<E, F> fn) {
+			return tail.map(fn).cons(fn.apply(head));
 		}
 
 		@Override
@@ -78,6 +80,11 @@ public abstract class ImmutableList<E> {
 			throw new NoSuchElementException();
 		}
 
+		@Override
+		public <F> ImmutableList<F> map(Function<E, F> fn) {
+			return nil();
+		}
+		
 		@Override
 		public int hashCode() {
 			return 0;
