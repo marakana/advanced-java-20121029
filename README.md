@@ -1,6 +1,24 @@
 Advanced Java, October 29-31 2012
 =================================
 
+Class Videos
+------------
+
+Day 1:
+
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/1.1.mov
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/1.2.mov
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/1.3.mov
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/1.4.mov
+
+Day 2:
+
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/2.1.mov
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/2.2.mov
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/2.3.mov
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/2.4.mov
+
+
 Contracts and Inheritance
 -------------------------
 
@@ -43,3 +61,5 @@ Design Patterns
   - Composite: multiple implementations of a common interface, some of which may recursively contain instances of the interface. Example: expressions with sub-expressions in a parse tree.
 
   - Visitor: avoid polluting a composite (above) data structure with orthogonal concerns. Define a "Visitor" interface with visit() methods for each composite implementation case, and define an accept() method in the composite interface which takes a visitor. Example: multiple serializers and evaluators for expressions.
+
+  - Producer-Consumer: implement concurrent programs as a set of producers which push messages to a queue, and consumers which pop messages from the queue. Use java.util.concurrent.BlockingQueue to implement this cleanly, and avoid explicit synchronization.
