@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -6,28 +7,41 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.marakana.concurrency.Logger;
+
 public class Server {
 
-	private static class Worker implements Runnable {
+	private static class Worker implements Runnable, Closeable {
 
 		private final Socket client;
+		private final Logger logger;
 
-		public Worker(Socket client) {
+		public Worker(Socket client, Logger logger) {
 			this.client = client;
+			this.logger = logger;
 		}
 
 		@Override
 		public void run() {
 			try {
-				BufferedReader in = new BufferedReader(new InputStreamReader(
-						client.getInputStream()));
 				try {
-					System.out.println(in.readLine());
+					BufferedReader in = new BufferedReader(
+							new InputStreamReader(client.getInputStream()));
+					try {
+						logger.log(in.readLine());
+					} finally {
+						in.close();
+					}
 				} finally {
-					in.close();
+					client.close();
 				}
 			} catch (IOException e) {
 			}
+		}
+
+		@Override
+		public void close() throws IOException {
+			client.close();
 		}
 
 	}
@@ -36,10 +50,23 @@ public class Server {
 		try {
 			ServerSocket server = new ServerSocket(31337);
 			try {
-				ExecutorService workers = Executors.newFixedThreadPool(10);
-				while (true) {
-					Socket client = server.accept();
-					workers.submit(new Worker(client));
+				// start a thread pool with ten threads, and run the logger
+				ExecutorService threadPool = Executors.newFixedThreadPool(10);
+				try {
+					Logger logger = new Logger();
+					threadPool.execute(logger);
+
+					// accept client connections and hand them off to worker
+					// threads
+					while (true) {
+						Socket client = server.accept();
+						threadPool.execute(new Worker(client, logger));
+					}
+				} finally {
+					for (Runnable task : threadPool.shutdownNow()) {
+						Worker worker = (Worker) task;
+						worker.close();
+					}
 				}
 			} finally {
 				server.close();
