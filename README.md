@@ -18,6 +18,12 @@ Day 2:
   - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/2.3.mov
   - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/2.4.mov
 
+Day 3:
+
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/3.1.mov
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/3.2.mov
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/3.3.mov
+  - https://mrkn.s3.amazonaws.com/recordings/advanced-java-sfdc-20121029/3.4.mov
 
 Contracts and Inheritance
 -------------------------
@@ -56,6 +62,11 @@ Benefits
   - Obviates need for synchronization, resulting in correct, high performance concurrent code
   - Encourages sharing (memory efficiency. See Okasaki, "Purely Functional Data Structures." e.g. finger trees, hash array mapped tries)
 
+Resource Management
+-------------------
+
+  - Any time a resource is allocated or obtained, you must try/finally immediately afterwards to close the resource (Java 6), or use a try-with-resources block (Java 7).
+
 Design Patterns
 ---------------
 
@@ -66,3 +77,5 @@ Design Patterns
   - Producer-Consumer: implement concurrent programs as a set of producers which push messages to a queue, and consumers which pop messages from the queue. Use java.util.concurrent.BlockingQueue to implement this cleanly, and avoid explicit synchronization.
 
   - Builder: start with an empty "builder" object, and chain method calls to append/set properties on it.
+
+  - Decorator: wrap a class that implements low-level functionality in another class that implements additional higher-level functionality. Example: java.io.*
