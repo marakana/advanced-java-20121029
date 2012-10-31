@@ -54,6 +54,7 @@ Benefits
   - Safe inheritance (code reuse)
   - Stable object identity
   - Obviates need for synchronization, resulting in correct, high performance concurrent code
+  - Encourages sharing (memory efficiency. See Okasaki, "Purely Functional Data Structures." e.g. finger trees, hash array mapped tries)
 
 Design Patterns
 ---------------
@@ -63,3 +64,5 @@ Design Patterns
   - Visitor: avoid polluting a composite (above) data structure with orthogonal concerns. Define a "Visitor" interface with visit() methods for each composite implementation case, and define an accept() method in the composite interface which takes a visitor. Example: multiple serializers and evaluators for expressions.
 
   - Producer-Consumer: implement concurrent programs as a set of producers which push messages to a queue, and consumers which pop messages from the queue. Use java.util.concurrent.BlockingQueue to implement this cleanly, and avoid explicit synchronization.
+
+  - Builder: start with an empty "builder" object, and chain method calls to append/set properties on it.
