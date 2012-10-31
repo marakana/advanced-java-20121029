@@ -7,6 +7,10 @@ public abstract class ImmutableList<E> {
 	public abstract E head();
 	public abstract ImmutableList<E> tail();
 
+	public <F> ImmutableList<F> map(Function<E, F> fn) {
+		return null; // TODO
+	}
+
 	public ImmutableList<E> cons(final E head) {
 		return new Cons<E>(head, this);
 	}
