@@ -1,31 +1,25 @@
 package com.marakana.concurrency;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Logger implements Runnable {
 
-	Queue<String> queue = new LinkedList<String>();
+	BlockingQueue<String> queue = new LinkedBlockingQueue<String>();
 
 	public void log(String message) {
-		synchronized (this) {
-			queue.add(message);
-			notify();
+		try {
+			queue.put(message);
+		} catch (InterruptedException e) {
 		}
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			synchronized (this) {
-				if (queue.isEmpty()) {
-					try {
-						wait();
-					} catch (InterruptedException e) {
-					}
-				} else {
-					System.out.println(queue.remove());
-				}
+			try {
+				System.out.println(queue.take());
+			} catch (InterruptedException e) {
 			}
 		}
 	}
