@@ -48,8 +48,8 @@ public class ImmutableListTest {
 		assertEquals(FOUR_THREE_TWO, THREE_TWO_ONE.map(PLUS_ONE));
 	}
 
-//	@Test
-//	public void mapToStringShouldWork() {
-//		assertEquals(THREE_TWO_ONE_STRINGS, THREE_TWO_ONE.map(TO_STRING));
-//	}
+	@Test
+	public void mapToStringShouldWork() {
+		assertEquals(THREE_TWO_ONE_STRINGS, THREE_TWO_ONE.map(TO_STRING));
+	}
 }
