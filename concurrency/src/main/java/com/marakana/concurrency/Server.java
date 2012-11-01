@@ -1,3 +1,4 @@
+package com.marakana.concurrency;
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.IOException;
@@ -7,7 +8,6 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.marakana.concurrency.Logger;
 
 public class Server {
 
@@ -28,7 +28,9 @@ public class Server {
 					BufferedReader in = new BufferedReader(
 							new InputStreamReader(client.getInputStream()));
 					try {
-						logger.log(in.readLine());
+						for (String line = in.readLine(); line != null; line = in.readLine()) {
+							logger.log(line);
+						}
 					} finally {
 						in.close();
 					}
